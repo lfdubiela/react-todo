@@ -3,12 +3,22 @@ import Grid from '../template/grid'
 import IconButton from '../template/iconButton'
 
 export default props => {
+    const keyHandler = (e) => {
+        console.log(e.key);
+        if (e.key === 'Enter') {
+            e.shiftKey ? props.handleSearch() : props.handleAdd()
+        } else if (e.key === 'Escape') {
+            props.handleClear()
+        }
+    }
+
     return (
         <div role='form' className='todo-form'>
             <Grid cols='12 9 10'>
                 <input id="description" type="text" className="form-control"
                     placeholder='Adicione uma tarefa'
                     onChange={props.handleChange}
+                    onKeyUp={keyHandler}
                     value={props.description}
                 />
             </Grid>
